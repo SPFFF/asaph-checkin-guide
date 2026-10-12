@@ -267,6 +267,20 @@ footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
 .rule-list p{font-size:.92rem;color:var(--muted)}
 .rule-list p.say{color:var(--fg);background:var(--surface-2);border-radius:10px;padding:8px 10px;font-size:.88rem}
 .rules .note{margin-top:0}
+
+/* scan link CTA */
+.cta{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:clamp(16px,2.4vw,24px);border-radius:20px;border:2px solid var(--accent);background:linear-gradient(120deg,var(--accent-soft),transparent 80%),var(--surface);box-shadow:0 0 0 6px var(--accent-soft)}
+.cta-text{display:grid;gap:6px;min-width:0}
+.cta-kicker{font-family:var(--f-display);font-weight:800;font-size:1.05rem;color:var(--accent)}
+.cta code{font-size:clamp(.85rem,1.6vw,1.05rem);color:var(--fg);word-break:break-all;user-select:all}
+.cta-btns{display:flex;flex-wrap:wrap;gap:10px}
+.cta-go{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-family:var(--f-display);font-weight:800;font-size:1.1rem;text-decoration:none;box-shadow:0 10px 24px -8px var(--accent);transition:transform .15s}
+.cta-go:hover{transform:translateY(-2px)}
+.cta-copy{font:inherit;font-weight:700;font-size:.95rem;padding:13px 20px;border-radius:999px;border:2px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.cta-copy:hover{background:var(--accent-soft)}
+@media (prefers-reduced-motion:no-preference){.cta-go{animation:pulse 2s ease-out infinite}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}70%{box-shadow:0 0 0 16px transparent}100%{box-shadow:0 0 0 0 transparent}}
+@media (max-width:640px){.cta-btns,.cta-go,.cta-copy{width:100%;justify-content:center}}
 </style>
 
 <header class="wrap top">
@@ -338,7 +352,16 @@ footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
     <span class="eyebrow"><span class="th">ส่วนที่ 1 · มือถือของ Staff</span><span class="en">Part 1 · Staff phone</span></span>
     <h2><span class="th">เปิดลิงค์สแกน แล้วสแกน QR ของลูกค้า</span><span class="en">Open the scan link and scan the guest's QR</span></h2>
     <div class="who"><span class="tag"><span class="th">ใช้กับลูกค้าที่ซื้อบัตรผ่านแอพ ASAPH</span><span class="en">For guests who bought tickets in the ASAPH app</span></span></div>
-    <div class="linkbox"><code id="scanUrl">https://regito.jetcoding.co/asaph-scan</code><button class="btn" id="copyBtn" type="button"><span class="th">คัดลอกลิงค์</span><span class="en">Copy link</span></button><a class="btn" href="https://regito.jetcoding.co/asaph-scan" target="_blank" rel="noopener"><span class="th">เปิดลิงค์</span><span class="en">Open link</span> ↗</a></div>
+    <div class="cta">
+      <div class="cta-text">
+        <span class="cta-kicker"><span class="th">👇 เริ่มตรงนี้ · กดเปิดหน้าสแกน</span><span class="en">👇 Start here · open the scanner</span></span>
+        <code id="scanUrl">https://regito.jetcoding.co/asaph-scan</code>
+      </div>
+      <div class="cta-btns">
+        <a class="cta-go" href="https://regito.jetcoding.co/asaph-scan" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 12h10"/></svg><span class="th">เปิดหน้าสแกน</span><span class="en">Open scanner</span><span aria-hidden="true">↗</span></a>
+        <button class="cta-copy" id="copyBtn" type="button"><span class="th">คัดลอกลิงค์</span><span class="en">Copy link</span></button>
+      </div>
+    </div>
   </div>
   <div class="walk" data-walk="w1"></div>
 </section>
