@@ -31,7 +31,7 @@
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.65;margin:0}
-.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+.wrap{max-width:1680px;margin:0 auto;padding-inline:clamp(16px,4vw,56px)}
 h1,h2,h3{font-family:var(--f-display);font-weight:800;line-height:1.25;text-wrap:balance;margin:0}
 p{margin:0}
 a{color:var(--accent)}
@@ -46,7 +46,7 @@ header.top{padding-block:40px 28px;display:grid;gap:22px}
 .mark{width:40px;height:40px;border-radius:11px;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);font-family:var(--f-display);font-weight:700;font-size:20px}
 header.top h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:700;letter-spacing:-.01em}
 header.top h1 em{font-style:normal;color:var(--accent)}
-.lede{max-width:62ch;color:var(--muted);font-size:1.05rem}
+.lede{max-width:90ch;color:var(--muted);font-size:1.05rem}
 
 /* gate flow */
 .flow{display:grid;grid-template-columns:auto 1fr;gap:0 16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
@@ -78,16 +78,17 @@ nav.tabs a.on{color:var(--fg);border-color:var(--line);background:var(--surface)
 nav.tabs a span:not(.th):not(.en){font-family:var(--f-display);font-weight:700;color:var(--accent);margin-right:5px}
 
 section.part{padding-block:56px 8px;scroll-margin-top:60px}
-.part-head{display:grid;gap:10px;margin-bottom:26px;max-width:70ch}
+.part-head{display:grid;gap:10px;margin-bottom:26px}
+.part-head p{max-width:90ch}
 .part-head h2{font-size:clamp(1.5rem,3.6vw,2.1rem)}
 .part-head .who{display:inline-flex;gap:8px;flex-wrap:wrap}
 .tag{font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
 .tag.beam{background:var(--beam-soft);color:var(--beam)}
 
 /* walkthrough */
-.walk{display:grid;grid-template-columns:300px minmax(0,1fr);gap:36px;align-items:start}
+.walk{display:grid;grid-template-columns:clamp(220px,24vw,340px) minmax(0,1fr);gap:clamp(18px,3vw,44px);align-items:start}
 .stage{position:sticky;top:76px;display:grid;gap:12px;justify-items:center}
-.phone{position:relative;width:min(280px,72vw);aspect-ratio:400/870;max-width:100%;border-radius:38px;background:var(--phone);padding:10px;border:1px solid var(--phone-edge);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.phone{position:relative;width:100%;aspect-ratio:400/870;max-width:100%;border-radius:38px;background:var(--phone);padding:10px;border:1px solid var(--phone-edge);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
 .screen{position:relative;width:100%;height:100%;border-radius:29px;overflow:hidden;background:#000}
 .screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .45s ease}
 .screen img.on{opacity:1}
@@ -155,7 +156,7 @@ ol.steps li.on p{color:var(--fg)}
 .ok .pill{background:var(--ok);color:#06210f}.warn .pill{background:var(--warn);color:#2a1300}.bad .pill{background:var(--bad);color:#fff}.pend .pill{background:var(--pend);color:#032521}.chk .pill{background:var(--accent);color:#fff}
 
 /* simulator */
-.sim{display:grid;grid-template-columns:300px minmax(0,1fr);gap:36px;align-items:center;margin-top:34px;padding:24px;border-radius:20px;border:1px solid var(--line);background:var(--surface)}
+.sim{display:grid;grid-template-columns:clamp(220px,24vw,340px) minmax(0,1fr);gap:36px;align-items:center;margin-top:34px;padding:24px;border-radius:20px;border:1px solid var(--line);background:var(--surface)}
 .sim h3{font-size:1.3rem;margin-bottom:6px}
 .sim-btns{display:grid;gap:10px;margin-top:16px}
 .sim-btns .btn{justify-content:flex-start;border-radius:12px;padding:12px 14px;font-size:.95rem;text-align:left}
@@ -219,13 +220,17 @@ details[open] summary::after{content:"–"}
 details>div{padding-bottom:14px;color:var(--muted);font-size:.95rem;display:grid;gap:6px}
 footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
 
-@media (max-width:820px){
+@media (max-width:640px){
   .walk,.sim,.band-wrap{grid-template-columns:minmax(0,1fr)}
   .stage{position:relative;top:0}
-  .lanes{grid-template-columns:minmax(0,1fr)}
+  .phone{width:min(270px,72vw)}
   .sim{padding:18px}
   .sim .phone{justify-self:center}
 }
+@media (max-width:900px){.band-wrap{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){.lanes{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:1400px){body{font-size:17px}}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
@@ -243,7 +248,8 @@ footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
 .rule-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;counter-reset:r}
 .rule-list li{counter-increment:r;display:grid;grid-template-rows:auto 1fr;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
 .rule-list li::before{content:counter(r);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;background:var(--accent);color:var(--accent-ink)}
-.rule-list li>div{display:grid;gap:8px;align-content:start}
+.rule-list li>div{display:flex;flex-direction:column;gap:8px}
+.rule-list p.say{margin-top:auto}
 .rule-list h3{font-size:1.02rem;line-height:1.35}
 .rule-list p{font-size:.92rem;color:var(--muted)}
 .rule-list p.say{color:var(--fg);background:var(--surface-2);border-radius:10px;padding:8px 10px;font-size:.88rem}
@@ -281,10 +287,10 @@ footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
   <div class="rules" id="rules">
     <div class="rules-head"><span class="eyebrow"><span class="th">กฎเหล็กสำหรับลูกค้าที่ซื้อในแอพ</span><span class="en">Rules for guests who bought in the app</span></span><h2><span class="th">ซื้อกี่ใบ สแกนทุกใบที่ซื้อ ในครั้งเดียว</span><span class="en">Scan every ticket they bought, all at once</span></h2></div>
     <ol class="rule-list">
-      <li><div><h3><span class="th">ถามก่อนว่า “ซื้อมากี่ใบ”</span><span class="en">First ask: “How many tickets did you buy?”</span></h3><p><span class="th">จำตัวเลขไว้ แล้วนับในแอพให้ตรงกัน (ตั๋วมีเลข #1, #2, #3 … ที่มุมรูป)</span><span class="en">Remember the number and check it against the app (tickets are numbered #1, #2, #3 … on their pictures).</span></p><p class="say"><span class="th">ตอบว่า: “ซื้อบัตรมากี่ใบคะ/ครับ รบกวนเปิดแอพ ASAPH ให้หน่อยนะคะ/ครับ”</span><span class="en">Reply: “How many tickets did you buy? Could you open the ASAPH app for me, please?”</span></p></div></li>
-      <li><div><h3><span class="th">ต้องเปิดจากแอพ ASAPH เท่านั้น ห้ามสแกนจากรูปที่แคปมา</span><span class="en">Only scan from the ASAPH app, never from a screenshot</span></h3><p><span class="th">ถ้าลูกค้าไม่รู้วิธี Staff ขอเปิดให้ได้ เช็คว่าเป็นหน้าในแอพจริง: หัวข้อ <b>Ticket Detail</b> มีลูกศร ‹ ย้อนกลับ, ป้าย <b>READY TO USE</b> และกดย้อนกลับไปหน้า <b>My Tickets</b> ได้ ถ้าเป็นรูปในอัลบั้มรูปหรือแชท ให้ขอเปิดจากแอพใหม่</span><span class="en">If the guest isn't sure how, staff may open it for them. Check it's really the app: a <b>Ticket Detail</b> header with a ‹ back arrow, the <b>READY TO USE</b> badge, and tapping back returns to <b>My Tickets</b>. If it's a photo in the gallery or a chat, ask them to open it from the app.</span></p></div></li>
-      <li><div><h3><span class="th">สแกนให้ครบทุกใบในครั้งเดียว ห้ามเว้น</span><span class="en">Scan all of them now, skip none</span></h3><p><span class="th">ซื้อ 5 ใบ สแกน 5 ใบเลย ไม่รับคำขอ “ขอสแกน 3 ใบก่อน ที่เหลือเดี๋ยวมาสแกน” หรือ “ใบนี้ให้เพื่อนสแกนไปแล้ว”</span><span class="en">Bought 5, scan 5 now. Don't accept “Scan 3 now, I'll come back for the rest” or “My friend already scanned this one.”</span></p></div></li>
-      <li><div><h3><span class="th">ให้ริสแบรนด์ทั้งหมดกับลูกค้าคนนั้น</span><span class="en">Give all the wristbands to that guest</span></h3><p><span class="th">สแกนผ่านกี่ใบ ให้ริสแบรนด์เท่านั้นกับลูกค้าที่ถือมือถือ ลูกค้าแจกเพื่อนเอง วิธีนี้ตัดปัญหาตั๋วถูกแบ่งสแกนหลายรอบ</span><span class="en">Give the guest holding the phone one wristband per ticket scanned. They hand them out to their friends. This stops tickets being split across several visits.</span></p><p class="say"><span class="th">ตอบว่า: “ทางงานต้องสแกนครบทุกใบในครั้งเดียวนะคะ/ครับ แล้วรับริสแบรนด์ไปแจกเพื่อนได้เลย”</span><span class="en">Reply: “We need to scan all your tickets together. Then you can take all the wristbands and give them to your friends.”</span></p></div></li>
+      <li><div><h3><span class="th">ถามก่อนว่า “ซื้อมากี่ใบ”</span><span class="en">First ask: “How many tickets did you buy?”</span></h3><p><span class="th">จำตัวเลขไว้ แล้วนับในแอพให้ตรงกัน (ตั๋วมีเลข #1, #2, #3 … ที่มุมรูป)</span><span class="en">Remember the number and check it against the app (tickets are numbered #1, #2, #3 … on their pictures).</span></p><p class="say"><span class="th">พูดว่า: “ซื้อบัตรมากี่ใบคะ/ครับ รบกวนเปิดแอพ ASAPH ให้หน่อยนะคะ/ครับ”</span><span class="en">Say: “How many tickets did you buy? Could you open the ASAPH app for me, please?”</span></p></div></li>
+      <li><div><h3><span class="th">ต้องเปิดจากแอพ ASAPH เท่านั้น ห้ามสแกนจากรูปที่แคปมา</span><span class="en">Only scan from the ASAPH app, never from a screenshot</span></h3><p><span class="th">ถ้าลูกค้าไม่รู้วิธี Staff ขอเปิดให้ได้ เช็คว่าเป็นหน้าในแอพจริง: หัวข้อ <b>Ticket Detail</b> มีลูกศร ‹ ย้อนกลับ, ป้าย <b>READY TO USE</b> และกดย้อนกลับไปหน้า <b>My Tickets</b> ได้ ถ้าเป็นรูปในอัลบั้มรูปหรือแชท ให้ขอเปิดจากแอพใหม่</span><span class="en">If the guest isn't sure how, staff may open it for them. Check it's really the app: a <b>Ticket Detail</b> header with a ‹ back arrow, the <b>READY TO USE</b> badge, and tapping back returns to <b>My Tickets</b>. If it's a photo in the gallery or a chat, ask them to open it from the app.</span></p><p class="say"><span class="th">พูดว่า: “รบกวนเปิดตั๋วจากในแอพ ASAPH นะคะ/ครับ ทางงานสแกนจากรูปแคปหน้าจอไม่ได้”</span><span class="en">Say: “Please open the ticket inside the ASAPH app. We can't scan screenshots.”</span></p></div></li>
+      <li><div><h3><span class="th">สแกนให้ครบทุกใบในครั้งเดียว ห้ามเว้น</span><span class="en">Scan all of them now, skip none</span></h3><p><span class="th">ซื้อ 5 ใบ สแกน 5 ใบเลย ไม่รับคำขอ “ขอสแกน 3 ใบก่อน ที่เหลือเดี๋ยวมาสแกน” หรือ “ใบนี้ให้เพื่อนสแกนไปแล้ว”</span><span class="en">Bought 5, scan 5 now. Don't accept “Scan 3 now, I'll come back for the rest” or “My friend already scanned this one.”</span></p><p class="say"><span class="th">พูดว่า: “ซื้อมา 5 ใบ ขอสแกนครบทั้ง 5 ใบเลยนะคะ/ครับ”</span><span class="en">Say: “You bought 5, so we'll scan all 5 now.”</span></p></div></li>
+      <li><div><h3><span class="th">ให้ริสแบรนด์ทั้งหมดกับลูกค้าคนนั้น</span><span class="en">Give all the wristbands to that guest</span></h3><p><span class="th">สแกนผ่านกี่ใบ ให้ริสแบรนด์เท่านั้นกับลูกค้าที่ถือมือถือ ลูกค้าแจกเพื่อนเอง วิธีนี้ตัดปัญหาตั๋วถูกแบ่งสแกนหลายรอบ</span><span class="en">Give the guest holding the phone one wristband per ticket scanned. They hand them out to their friends. This stops tickets being split across several visits.</span></p><p class="say"><span class="th">พูดว่า: “ทางงานต้องสแกนครบทุกใบในครั้งเดียวนะคะ/ครับ แล้วรับริสแบรนด์ไปแจกเพื่อนได้เลย”</span><span class="en">Say: “We need to scan all your tickets together. Then you can take all the wristbands and give them to your friends.”</span></p></div></li>
     </ol>
     <div class="note warn"><div class="ic">!</div><p><span class="th">ถ้าสแกนแล้วบางใบขึ้นกรอบส้ม “สแกนไปแล้ว” ไม่ต้องให้ริสแบรนด์สำหรับใบนั้น และแจ้งหัวหน้างาน</span><span class="en">If any ticket shows the orange “already scanned” box, give no wristband for it and call your lead.</span></p></div>
   </div>
