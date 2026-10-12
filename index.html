@@ -67,7 +67,12 @@ a.chip:hover{border-color:var(--accent)}
 
 /* sticky nav */
 nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-nav.tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.tabs .wrap{display:flex;align-items:center;gap:10px;padding-block:8px}
+.navlinks{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.theme{flex:none;display:flex;gap:2px;padding:3px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.theme button{font:inherit;font-size:.82rem;font-weight:600;border:0;background:transparent;color:var(--muted);padding:5px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.theme button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+@media (max-width:520px){.theme button .t{display:none}.theme button{padding:5px 9px}}
 nav.tabs a{flex:none;text-decoration:none;color:var(--muted);font-weight:500;font-size:.92rem;padding:7px 13px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
 nav.tabs a.on{color:var(--fg);border-color:var(--line);background:var(--surface)}
 nav.tabs a span{font-family:var(--f-display);font-weight:700;color:var(--accent);margin-right:5px}
@@ -255,13 +260,15 @@ footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
   </div>
 </header>
 
-<nav class="tabs" aria-label="ส่วนของคู่มือ"><div class="wrap">
+<nav class="tabs" aria-label="ส่วนของคู่มือ"><div class="wrap"><div class="navlinks">
   <a href="#part1"><span>1</span>เปิดลิงค์สแกน</a>
   <a href="#part2"><span>2</span>เปิดตั๋วในแอพลูกค้า</a>
   <a href="#results"><span>!</span>ผลสแกน 4 แบบ</a>
   <a href="#bands"><span>#</span>นับริสแบรนด์</a>
   <a href="#part3"><span>3</span>ขายหน้างานด้วย Beam</a>
   <a href="#faq"><span>?</span>ปัญหาที่เจอบ่อย</a>
+</div>
+  <div class="theme" role="group" aria-label="โหมดสี"><button type="button" data-th="light" aria-label="โหมดสว่าง">☀<span class="t"> สว่าง</span></button><button type="button" data-th="dark" aria-label="โหมดมืด">☾<span class="t"> มืด</span></button></div>
 </div></nav>
 
 <main class="wrap">
@@ -475,6 +482,17 @@ function buildWalk(el){
 }
 document.querySelectorAll('[data-walk]').forEach(buildWalk);
 
+/* theme toggle */
+(function(){
+  const root=document.documentElement, btns=[...document.querySelectorAll('[data-th]')];
+  const sysDark=()=>matchMedia('(prefers-color-scheme: dark)').matches;
+  const current=()=>root.dataset.theme||(sysDark()?'dark':'light');
+  const mark=()=>btns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.th===current())));
+  try{const s=localStorage.getItem('asaph-theme');if(s==='light'||s==='dark')root.dataset.theme=s;}catch(_){}
+  btns.forEach(b=>b.onclick=()=>{root.dataset.theme=b.dataset.th;try{localStorage.setItem('asaph-theme',b.dataset.th);}catch(_){}mark();});
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',mark);
+  mark();
+})();
 /* copy link */
 document.getElementById('copyBtn').onclick=async e=>{
   const b=e.currentTarget, txt=document.getElementById('scanUrl').textContent;
