@@ -235,6 +235,19 @@ footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
 :root[data-lang="en"] .th{display:none}
 :root[data-lang="en"] .en{display:inline}
 :root[data-lang="en"] body{font-family:var(--f-body)}
+
+/* rules */
+.rules{border-radius:18px;border:1px solid var(--accent);background:linear-gradient(180deg,var(--accent-soft),transparent 70%),var(--surface);padding:22px 20px;display:grid;gap:16px;scroll-margin-top:70px}
+.rules-head{display:grid;gap:6px}
+.rules-head h2{font-size:clamp(1.3rem,3vw,1.7rem)}
+.rule-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;counter-reset:r}
+.rule-list li{counter-increment:r;display:grid;grid-template-rows:auto 1fr;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.rule-list li::before{content:counter(r);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;background:var(--accent);color:var(--accent-ink)}
+.rule-list li>div{display:grid;gap:8px;align-content:start}
+.rule-list h3{font-size:1.02rem;line-height:1.35}
+.rule-list p{font-size:.92rem;color:var(--muted)}
+.rule-list p.say{color:var(--fg);background:var(--surface-2);border-radius:10px;padding:8px 10px;font-size:.88rem}
+.rules .note{margin-top:0}
 </style>
 
 <header class="wrap top">
@@ -247,9 +260,10 @@ footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
         <div class="q"><span class="th">ตอบว่า “ซื้อแล้ว”</span><span class="en">Answer: “Yes”</span></div>
         <h3><span class="th">ลูกค้ามีตั๋วในแอพ</span><span class="en">Guest has tickets in the app</span></h3>
         <div class="chain">
-          <a class="chip" href="#part1"><b>1</b><span class="th">เปิดลิงค์สแกน</span><span class="en">Open scan link</span></a><span class="arrow">→</span>
-          <a class="chip" href="#part2"><b>2</b><span class="th">เปิดตั๋วทุกใบ + สแกน</span><span class="en">Open every ticket + scan</span></a><span class="arrow">→</span>
-          <span class="chip band"><span class="th">ริสแบรนด์ = จำนวนที่สแกนผ่าน</span><span class="en">Wristbands = tickets scanned OK</span></span>
+          <span class="chip"><b>a</b><span class="th">ถาม “ซื้อมากี่ใบ”</span><span class="en">Ask “How many tickets?”</span></span><span class="arrow">→</span>
+          <a class="chip" href="#part2"><b>b</b><span class="th">เปิดตั๋วในแอพ (ห้ามรูปแคป)</span><span class="en">Open tickets in the app (no screenshots)</span></a><span class="arrow">→</span>
+          <a class="chip" href="#part1"><b>c</b><span class="th">สแกนครบทุกใบในครั้งเดียว</span><span class="en">Scan every ticket in one go</span></a><span class="arrow">→</span>
+          <span class="chip band"><span class="th">ให้ริสแบรนด์ทั้งหมดกับลูกค้า</span><span class="en">Hand over all wristbands</span></span>
         </div>
       </div>
       <div class="lane l-walk">
@@ -263,9 +277,21 @@ footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
       </div>
     </div>
   </div>
+
+  <div class="rules" id="rules">
+    <div class="rules-head"><span class="eyebrow"><span class="th">กฎเหล็กสำหรับลูกค้าที่ซื้อในแอพ</span><span class="en">Rules for guests who bought in the app</span></span><h2><span class="th">ซื้อกี่ใบ สแกนกี่ใบ ในครั้งเดียว</span><span class="en">Scan every ticket they bought, all at once</span></h2></div>
+    <ol class="rule-list">
+      <li><div><h3><span class="th">ถามก่อนว่า “ซื้อมากี่ใบ”</span><span class="en">First ask: “How many tickets did you buy?”</span></h3><p><span class="th">จำตัวเลขไว้ แล้วนับในแอพให้ตรงกัน (ตั๋วมีเลข #1, #2, #3 … ที่มุมรูป)</span><span class="en">Remember the number and check it against the app (tickets are numbered #1, #2, #3 … on their pictures).</span></p><p class="say"><span class="th">พูดว่า: “ซื้อบัตรมากี่ใบคะ/ครับ รบกวนเปิดแอพ ASAPH ให้หน่อยนะคะ/ครับ”</span><span class="en">Say: “How many tickets did you buy? Could you open the ASAPH app for me, please?”</span></p></div></li>
+      <li><div><h3><span class="th">ต้องเปิดจากแอพ ASAPH เท่านั้น ห้ามสแกนจากรูปที่แคปมา</span><span class="en">Only scan from the ASAPH app, never from a screenshot</span></h3><p><span class="th">ถ้าลูกค้าไม่รู้วิธี Staff ขอเปิดให้ได้ เช็คว่าเป็นหน้าในแอพจริง: หัวข้อ <b>Ticket Detail</b> มีลูกศร ‹ ย้อนกลับ, ป้าย <b>READY TO USE</b> และกดย้อนกลับไปหน้า <b>My Tickets</b> ได้ ถ้าเป็นรูปในอัลบั้มรูปหรือแชท ให้ขอเปิดจากแอพใหม่</span><span class="en">If the guest isn't sure how, staff may open it for them. Check it's really the app: a <b>Ticket Detail</b> header with a ‹ back arrow, the <b>READY TO USE</b> badge, and tapping back returns to <b>My Tickets</b>. If it's a photo in the gallery or a chat, ask them to open it from the app.</span></p></div></li>
+      <li><div><h3><span class="th">สแกนให้ครบทุกใบในครั้งเดียว ห้ามเว้น</span><span class="en">Scan all of them now, skip none</span></h3><p><span class="th">ซื้อ 5 ใบ สแกน 5 ใบเลย ไม่รับคำขอ “ขอสแกน 3 ใบก่อน ที่เหลือเดี๋ยวมาสแกน” หรือ “ใบนี้ให้เพื่อนสแกนไปแล้ว”</span><span class="en">Bought 5, scan 5 now. Don't accept “Scan 3 now, I'll come back for the rest” or “My friend already scanned this one.”</span></p></div></li>
+      <li><div><h3><span class="th">ให้ริสแบรนด์ทั้งหมดกับลูกค้าคนนั้น</span><span class="en">Give all the wristbands to that guest</span></h3><p><span class="th">สแกนผ่านกี่ใบ ให้ริสแบรนด์เท่านั้นกับลูกค้าที่ถือมือถือ ลูกค้าแจกเพื่อนเอง วิธีนี้ตัดปัญหาตั๋วถูกแบ่งสแกนหลายรอบ</span><span class="en">Give the guest holding the phone one wristband per ticket scanned. They hand them out to their friends. This stops tickets being split across several visits.</span></p><p class="say"><span class="th">พูดว่า: “ทางงานต้องสแกนครบทุกใบในครั้งเดียวนะคะ/ครับ แล้วรับริสแบรนด์ไปแจกเพื่อนได้เลย”</span><span class="en">Say: “We need to scan all your tickets together. Then you can take all the wristbands and give them to your friends.”</span></p></div></li>
+    </ol>
+    <div class="note warn"><div class="ic">!</div><p><span class="th">ถ้าสแกนแล้วบางใบขึ้นกรอบส้ม “สแกนไปแล้ว” ไม่ต้องให้ริสแบรนด์สำหรับใบนั้น และแจ้งหัวหน้างาน</span><span class="en">If any ticket shows the orange “already scanned” box, give no wristband for it and call your lead.</span></p></div>
+  </div>
 </header>
 
 <nav class="tabs" aria-label="Sections"><div class="wrap"><div class="navlinks">
+  <a href="#rules"><span>★</span><span class="th">กฎเหล็ก</span><span class="en">Rules</span></a>
   <a href="#part1"><span>1</span><span class="th">เปิดลิงค์สแกน</span><span class="en">Scan link</span></a>
   <a href="#part2"><span>2</span><span class="th">เปิดตั๋วในแอพลูกค้า</span><span class="en">Guest's app tickets</span></a>
   <a href="#results"><span>!</span><span class="th">ผลสแกน 4 แบบ</span><span class="en">4 scan results</span></a>
@@ -349,7 +375,7 @@ footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
   <div class="part-head">
     <span class="eyebrow"><span class="th">กติการิสแบรนด์</span><span class="en">Wristband rule</span></span>
     <h2><span class="th">สแกนผ่าน 1 ใบ = ริสแบรนด์ 1 เส้น</span><span class="en">1 ticket scanned OK = 1 wristband</span></h2>
-    <p class="muted"><span class="th">ลูกค้ามาเป็นกลุ่มและให้คนเดียวถือมือถือได้ ให้นับจำนวนตั๋วในแอพก่อน สแกนให้ครบทุกใบ แล้วให้ริสแบรนด์เท่ากับจำนวนที่ขึ้นกรอบเขียว</span><span class="en">Groups often have one person holding all the tickets. Count the tickets in the app first, scan every one, then give as many wristbands as there were green results.</span></p>
+    <p class="muted"><span class="th">ถามลูกค้าว่าซื้อมากี่ใบ นับในแอพให้ตรง สแกนครบทุกใบในครั้งเดียว แล้วให้ริสแบรนด์ทั้งหมดกับลูกค้าคนที่ถือมือถือ ให้ลูกค้าแจกเพื่อนเอง ไม่แบ่งสแกนเป็นหลายรอบ</span><span class="en">Ask how many tickets they bought and check the count in the app. Scan every ticket in one go, then give all the wristbands to the guest holding the phone to hand out. No splitting scans across visits.</span></p>
   </div>
   <div class="band-wrap">
     <div>
@@ -403,6 +429,8 @@ footer{padding-block:48px 60px;color:var(--muted);font-size:.85rem}
     <div>
       <details open><summary><span class="th">ส่องแล้ว QR ไม่ยอมอ่าน</span><span class="en">The QR won't scan</span></summary><div><p><span class="th">ขอให้ลูกค้าเพิ่มความสว่างหน้าจอ ขยับให้ QR อยู่กลางกรอบแดงและนิ่ง 1–2 วินาที ถ้าที่มืดให้กด ⚡ เปิดไฟฉาย</span><span class="en">Ask the guest to turn up screen brightness. Keep the QR centred in the red frame and still for 1–2 seconds. In the dark, tap ⚡ for the torch.</span></p><p><span class="th">ถ้ายังไม่ได้ ใช้แท็บ</span><span class="en">Still no luck? Use the</span> <span class="ui">กรอก Ticket ID</span> <span class="th">แล้วพิมพ์เลขใต้ QR เช่น</span><span class="en">(Enter Ticket ID) tab and type the number under the QR, e.g.</span> <code>#TKT-OD-261012A6FC92A7</code></p></div></details>
       <details><summary><span class="th">ลูกค้าเปิดแอพแล้วไม่เห็นตั๋ว</span><span class="en">The guest can't see their tickets</span></summary><div><p><span class="th">ไปที่ Profile แล้วกด <span class="ui">Refresh tickets</span> ที่หัวข้อ My Tickets ตรวจว่าลูกค้าล็อกอินบัญชีเดียวกับที่ใช้ซื้อ ถ้ายังไม่เห็น พาไปจุดช่วยเหลือ หรือให้ซื้อหน้างานตามส่วนที่ 3</span><span class="en">Go to Profile and tap <span class="ui">Refresh tickets</span> under My Tickets. Check they're logged in to the account they bought with. If tickets still don't show, send them to the help desk or sell at the door (Part 3).</span></p></div></details>
+      <details><summary><span class="th">ลูกค้าขอสแกนบางใบก่อน หรือบอกว่าเพื่อนสแกนไปแล้ว</span><span class="en">Guest wants to scan only some, or says a friend scanned already</span></summary><div><p><span class="th">ไม่ได้ ต้องสแกนครบทุกใบที่ซื้อในครั้งเดียว แล้วให้ริสแบรนด์ทั้งหมดกับลูกค้าคนนั้นไปแจกเพื่อนเอง อธิบายสุภาพว่าเป็นกติกาของงาน</span><span class="en">Not allowed. Scan every ticket they bought in one go and give all the wristbands to that guest to hand out. Explain politely that it's the event rule.</span></p><p><span class="th">ถ้าสแกนแล้วมีใบที่ขึ้นกรอบส้ม “สแกนไปแล้ว” ไม่ให้ริสแบรนด์สำหรับใบนั้น และแจ้งหัวหน้างาน</span><span class="en">If a ticket shows the orange “already scanned” box, no wristband for it, and call your lead.</span></p></div></details>
+      <details><summary><span class="th">ลูกค้ายื่นรูปที่แคปหน้าจอมา</span><span class="en">Guest shows a screenshot</span></summary><div><p><span class="th">ไม่สแกนจากรูปแคป ขอให้เปิดแอพ ASAPH → Profile → My Tickets แล้วเปิดตั๋วทีละใบ ถ้าลูกค้าเปิดไม่เป็น Staff ขอเปิดให้ได้</span><span class="en">Don't scan screenshots. Ask them to open the ASAPH app → Profile → My Tickets and open each ticket. If they're unsure how, staff may open it for them.</span></p></div></details>
       <details><summary><span class="th">ขึ้นกรอบส้ม “สแกนไปแล้ว”</span><span class="en">Orange “Already scanned” box</span></summary><div><p><span class="th">ไม่ให้ริสแบรนด์สำหรับใบนั้น ดูวันเวลาในกรอบว่าใช้ไปเมื่อไหร่ ส่วนมากลูกค้าเปิดใบเดิมซ้ำ ให้ย้อนกลับไปเลือกใบถัดไป ถ้าลูกค้าแย้ง แจ้งหัวหน้างาน</span><span class="en">No wristband for that ticket. The box shows when it was used. Usually the guest reopened the same ticket, so go back and pick the next one. If the guest disputes it, call your lead.</span></p><p><span class="th">ปุ่ม <span class="ui pink">ปริ้นอีกครั้ง</span> ในกรอบนี้ใช้ตามที่หัวหน้างานกำหนดเท่านั้น</span><span class="en">The <span class="ui pink">ปริ้นอีกครั้ง</span> (Print again) button in this box is only used as your lead instructs.</span></p></div></details>
       <details><summary><span class="th">เผลอกดยืนยันผิดใบ / ผิดคน</span><span class="en">Confirmed the wrong ticket or person</span></summary><div><p><span class="th">หยุดก่อน ไม่ต้องสแกนซ้ำ แจ้งหัวหน้างานพร้อมชื่อที่ขึ้นในกรอบเขียว เพราะตั๋วที่ยืนยันแล้วจะขึ้นว่าสแกนไปแล้วทุกครั้งต่อจากนี้</span><span class="en">Stop and don't rescan. Tell your lead the name shown in the green box, because a confirmed ticket will show “already scanned” from now on.</span></p></div></details>
       <details><summary><span class="th">ตัวเลขด้านล่างหน้าสแกนคืออะไร</span><span class="en">What are the numbers under the scanner?</span></summary><div><p><span class="th"><b>รายชื่อผู้เข้าร่วม</b> แสดงจำนวนสแกนแล้ว / ยังไม่สแกน ของประเภทบัตรที่เพิ่งสแกน</span><span class="en"><b>รายชื่อผู้เข้าร่วม</b> (Attendees) shows scanned / not yet scanned for the ticket type you just scanned.</span></p><p><span class="th"><b>ตัวเลขทุก Asaph Event</b> แสดงยอดรวมของงาน เช่น EARLY BIRD PASS (1 DAY) จำนวน Ticket 1326 สแกนแล้ว 1251 รอสแกน 75 กด <span class="ui">เปิดรายการ</span> เพื่อดูรายชื่อ</span><span class="en"><b>ตัวเลขทุก Asaph Event</b> (All ASAPH event totals) shows event-wide counts, e.g. EARLY BIRD PASS (1 DAY): 1326 tickets, 1251 scanned, 75 waiting. Tap <span class="ui">เปิดรายการ</span> (Open list) for names.</span></p></div></details>
@@ -428,9 +456,9 @@ const WALKS = {
   w2:{steps:[
     {img:'b1',taps:[[.87,.95]],t:B('เปิดแอพ ASAPH แล้วกดแท็บ Profile','Open the ASAPH app and tap Profile'),d:B('แท็บ <b>Profile</b> อยู่มุมขวาล่างสุดของแอพ','The <b>Profile</b> tab is at the far bottom right.')},
     {img:'b2',taps:[[.88,.55]],t:B('เลื่อนลงไปที่หัวข้อ “My Tickets”','Scroll down to “My Tickets”'),d:B('ตั๋วที่ซื้อทั้งหมดอยู่ที่นี่ ถ้าตั๋วไม่ขึ้นหรือไม่ครบ กด <span class="ui">Refresh tickets ↻</span>','All purchased tickets are here. If some are missing, tap <span class="ui">Refresh tickets ↻</span>.')},
-    {img:'b3',taps:[[.5,.47]],t:B('นับจำนวนตั๋ว แล้วกดเปิดใบแรก (#1)','Count the tickets, then open #1'),d:B('มุมรูปของแต่ละใบมีเลข #1, #2, #3 … ใช้นับว่าลูกค้ามีกี่ใบ กดที่ใบ #1 เพื่อเปิด QR','Each ticket has #1, #2, #3 … on its picture. Use these to count. Tap #1 to open its QR.')},
-    {img:'b4',taps:[],scan:[.5,.73],t:B('หน้า Ticket Detail แสดง QR → Staff สแกน','Ticket Detail shows the QR → staff scans'),d:B('มีป้าย <b>READY TO USE</b> และเลข Ticket Number ใต้ QR ให้ Staff ส่องด้วยลิงค์สแกน (ส่วนที่ 1) จนขึ้นกรอบเขียว','It shows a <b>READY TO USE</b> badge and the ticket number under the QR. Scan it with the scan link (Part 1) until you get green.')},
-    {img:'b4',taps:[[.09,.05]],t:B('กดย้อนกลับ ‹ แล้วเปิดใบถัดไป','Tap back ‹ and open the next ticket'),d:B('กลับไปที่ My Tickets แล้วเปิด #2, #3 … ทำซ้ำจนครบทุกใบ ระวังอย่าเปิดใบเดิมซ้ำ (จะขึ้นกรอบส้ม)','Return to My Tickets and open #2, #3 … until every ticket is done. Don\'t reopen one you\'ve scanned (it will show orange).')},
+    {img:'b3',taps:[[.5,.47]],t:B('นับตั๋วให้ตรงกับที่ลูกค้าบอก แล้วเปิดใบแรก (#1)','Match the count to what the guest said, then open #1'),d:B('มุมรูปของแต่ละใบมีเลข #1, #2, #3 … นับให้ตรงกับจำนวนที่ลูกค้าบอกว่าซื้อมา กดที่ใบ #1 เพื่อเปิด QR','Each ticket has #1, #2, #3 … on its picture. Check the count matches what the guest told you. Tap #1 to open its QR.')},
+    {img:'b4',taps:[],scan:[.5,.73],t:B('หน้า Ticket Detail แสดง QR → Staff สแกน','Ticket Detail shows the QR → staff scans'),d:B('ต้องเป็นหน้านี้ในแอพเท่านั้น <b>ห้ามสแกนจากรูปที่แคปมา</b> สังเกตหัวข้อ Ticket Detail, ลูกศร ‹ และป้าย <b>READY TO USE</b> แล้วส่องด้วยลิงค์สแกน (ส่วนที่ 1) จนขึ้นกรอบเขียว','It must be this screen inside the app. <b>Never scan a screenshot.</b> Look for the Ticket Detail header, the ‹ arrow and the <b>READY TO USE</b> badge, then scan with the scan link (Part 1) until you get green.')},
+    {img:'b4',taps:[[.09,.05]],t:B('กดย้อนกลับ ‹ แล้วเปิดใบถัดไป','Tap back ‹ and open the next ticket'),d:B('กลับไปที่ My Tickets แล้วเปิด #2, #3 … ทำซ้ำจนครบทุกใบในครั้งเดียว ห้ามเว้นไว้สแกนทีหลัง ระวังอย่าเปิดใบเดิมซ้ำ (จะขึ้นกรอบส้ม)','Return to My Tickets and open #2, #3 … until every ticket is done in this visit. Don\'t leave any for later, and don\'t reopen one you\'ve scanned (it will show orange).')},
     {img:'b5',taps:[[.5,.46]],t:B('มีมากกว่า 5 ใบ ให้กด “ถัดไป →”','More than 5? Tap “ถัดไป →” (Next)'),d:B('หน้าละ 5 ใบ ด้านล่างรายการจะมี <span class="ui">← ก่อนหน้า</span> 1/2 <span class="ui">ถัดไป →</span> ในตัวอย่างมี 7 ใบ หน้า 2/2 คือ #6 และ #7 สแกนครบ 7 ใบ = ริสแบรนด์ 7 เส้น','Five per page. Below the list: <span class="ui">← ก่อนหน้า</span> 1/2 <span class="ui">ถัดไป →</span>. The example has 7 tickets; page 2/2 holds #6 and #7. All 7 scanned = 7 wristbands.')}
   ]},
   w3:{steps:[
