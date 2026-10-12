@@ -2,7 +2,7 @@
 <title>ASAPH Gate Check-in</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Prompt:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* Layout: a gate-side field manual — sticky lane tabs, each lane = phone replay (real screenshots + tap marks) beside numbered steps; one live scan simulator. Dark-first like the ASAPH app. */
 :root{
@@ -11,8 +11,8 @@
   --ok:#2fd36d; --ok-soft:rgba(47,211,109,.12); --warn:#ff8a22; --warn-soft:rgba(255,138,34,.12);
   --bad:#ff4f62; --bad-soft:rgba(255,79,98,.12); --pend:#25c4b4; --pend-soft:rgba(37,196,180,.12);
   --beam:#6a4dff; --beam-soft:rgba(106,77,255,.14); --phone:#050406; --phone-edge:#2c2430;
-  --f-display:"Bai Jamjuree","IBM Plex Sans Thai",system-ui,sans-serif;
-  --f-body:"IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-display:"Montserrat","Prompt",system-ui,sans-serif;
+  --f-body:"Montserrat","Prompt",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   color-scheme:dark;
 }
@@ -32,7 +32,7 @@
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.65;margin:0}
 .wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
-h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1,h2,h3{font-family:var(--f-display);font-weight:800;line-height:1.25;text-wrap:balance;margin:0}
 p{margin:0}
 a{color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
